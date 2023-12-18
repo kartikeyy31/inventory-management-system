@@ -4,6 +4,7 @@ import com.example.inventorymanagementsystem.enitity.Product;
 import com.example.inventorymanagementsystem.notify.ProductNotifier;
 import org.springframework.stereotype.Component;
 
+import javax.sound.sampled.Port;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,5 +49,44 @@ public class ProductRepository {
             productDetails.remove(productId);
         else
             throw new IllegalArgumentException("this product id doesn't exists");
+    }
+
+    public List<Product> searchByBrand(String brand) {
+        List<Product> products = new ArrayList<> ();
+
+        for (HashMap.Entry<String, Product> entry : productDetails.entrySet()) {
+            Product product = entry.getValue();
+
+            if (product.getBrand().equals(brand))
+                products.add(product);
+        }
+
+        return products;
+    }
+
+    public List<Product> searchByName(String name) {
+        List<Product> products = new ArrayList<> ();
+
+        for (HashMap.Entry<String, Product> entry : productDetails.entrySet()) {
+            Product product = entry.getValue();
+
+            if (product.getName().equals(name))
+                products.add(product);
+        }
+
+        return products;
+    }
+
+    public List<Product> searchByCategory(String category) {
+        List<Product> products = new ArrayList<> ();
+
+        for (HashMap.Entry<String, Product> entry : productDetails.entrySet()) {
+            Product product = entry.getValue();
+
+            if (product.getCategory().equals(category))
+                products.add(product);
+        }
+
+        return products;
     }
 }
