@@ -4,11 +4,24 @@ import com.example.inventorymanagementsystem.enitity.Product;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 public class ProductRepository {
     HashMap<String, Product> productDetails = new HashMap<> ();
+
+    public List<Product> getAllProduct() {
+        List<Product> products = new ArrayList<>();
+
+        for (HashMap.Entry<String, Product> entry : productDetails.entrySet()) {
+            Product product = entry.getValue();
+            products.add(product);
+        }
+
+        return products;
+    }
 
     public Product addProduct(Product product) {
         String productId = String.valueOf(productDetails.size());

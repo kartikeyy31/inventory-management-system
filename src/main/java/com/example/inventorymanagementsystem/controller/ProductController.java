@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ims")
 public class ProductController {
@@ -16,6 +18,11 @@ public class ProductController {
     @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping("/getAllProduct")
+    public List<Product> getAllProduct() {
+        return productService.getAllProduct();
     }
 
     @PostMapping("/addProduct")
