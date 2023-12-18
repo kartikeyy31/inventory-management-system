@@ -1,8 +1,8 @@
 package com.example.inventorymanagementsystem.repository;
 
 import com.example.inventorymanagementsystem.enitity.Product;
+import com.example.inventorymanagementsystem.notify.ProductNotifier;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.DispatcherServlet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +11,11 @@ import java.util.List;
 @Component
 public class ProductRepository {
     HashMap<String, Product> productDetails = new HashMap<> ();
+    private final ProductNotifier productNotifier;
+
+    public ProductRepository(ProductNotifier productNotifier) {
+        this.productNotifier = productNotifier;
+    }
 
     public List<Product> getAllProduct() {
         List<Product> products = new ArrayList<>();
@@ -27,6 +32,7 @@ public class ProductRepository {
         String productId = String.valueOf(productDetails.size());
         product.setId(productId);
         productDetails.put(productId, product);
+        productNotifier.notify(product);
         return product;
     }
 
